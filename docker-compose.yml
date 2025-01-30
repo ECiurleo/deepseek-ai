@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["ollama serve && ollama run deepseek-r1:7b"] # download the model if you dont already have it, its about 5GB
+    mem_reservation: 4g # set a minimum memory to use for the container, this will ensure the 7b runs completely in memory
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - open-webui:/app/backend/data
+    ports:
+      - "3000:8080"
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  ollama:
+  open-webui:

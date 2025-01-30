@@ -1,7 +1,14 @@
-# deepseek-ai
-A small POC of a containerised DeepSeek chat written in Python
+# Docker Compose
 
-## docker build -t deepseek-api-container .
+Simple as ```docker compose up```
 
-## API is set as an Environment Variable so it can easily be stored as a secret (and never accidentally commited into code!)
-docker run -e DEEPSEEK_API_KEY="your-deepseek-api-key" deepseek-api-container
+#Manual run 
+
+## CPU only - https://hub.docker.com/r/ollama/ollama 
+```docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama```
+
+## https://ollama.com/library/deepseek-r1
+```docker exec -it ollama ollama run deepseek-r1:7b```
+
+## UI to conect to it 
+```docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main```
