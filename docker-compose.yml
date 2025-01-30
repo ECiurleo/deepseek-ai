@@ -10,8 +10,10 @@ services:
       - "11434:11434"
     restart: unless-stopped
     entrypoint: ["/bin/bash", "-c"]
-    command: ["ollama serve && ollama run deepseek-r1:7b"] # download the model if you dont already have it, its about 5GB
-    mem_reservation: 4g # set a minimum memory to use for the container, this will ensure the 7b runs completely in memory
+    # download the model if you dont already have it, its about 4.7GB
+    command: ["ollama serve && ollama run deepseek-r1:7b"] 
+    # set a minimum memory to use for the container, this will ensure the 7b runs completely in memory
+    mem_reservation: 4g 
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -27,7 +29,8 @@ services:
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
+# ollama volume defined so you don't need to download the model every time.
+# open-webui volume defined to retain user access/history persistence.
 volumes:
   ollama:
   open-webui:

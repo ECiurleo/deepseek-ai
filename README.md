@@ -1,5 +1,6 @@
 # Run Locally 
-Run a Deepseek AI locally using docker. Including a chat interface to interact with it. 
+Run a Deepseek AI locally using docker.  
+Including a chat interface to interact with it. 
 
 ## Docker Compose
 Simple as ```docker compose up```
