@@ -11,7 +11,7 @@ https://hub.docker.com/r/ollama/ollama
 ```docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama```
 
 #### Download the Model
-https://ollama.com/library/deepseek-r1
+https://ollama.com/library/deepseek-1  
 ```docker exec -it ollama ollama run deepseek-r1:7b```
 
 ### Chat UI to conect to it 
