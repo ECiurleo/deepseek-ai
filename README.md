@@ -7,7 +7,7 @@ Simple as ```docker compose up```
 ## Manual components if you don't want to use the Docker Compose
 
 #### CPU only Deepseek AI (amd and nvidia available) 
-https://hub.docker.com/r/ollama/ollama 
+https://hub.docker.com/r/ollama/ollama  
 ```docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama```
 
 #### Download the Model
