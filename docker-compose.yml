@@ -10,9 +10,9 @@ services:
       - "11434:11434"
     restart: unless-stopped
     entrypoint: ["/bin/bash", "-c"]
-    # download the model if you dont already have it, its about 4.7GB
-    command: ["ollama serve && ollama run deepseek-r1:7b"] 
-    # set a minimum memory to use for the container, this will ensure the 7b runs completely in memory
+    # download the model if you dont already have it, its about 1.1GB
+    command: ["ollama serve && ollama run deepseek-r1:1.5b"] 
+    # set a minimum memory to use for the container, this will ensure the 1.5b runs completely in memory
     mem_reservation: 4g 
 
   open-webui:
