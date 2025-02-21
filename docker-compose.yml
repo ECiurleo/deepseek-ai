@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   ollama:
-    image: ollama/ollama
+    image: ollama/ollama  # Use the standard image
     container_name: ollama
     volumes:
       - ollama:/root/.ollama
@@ -10,10 +8,15 @@ services:
       - "11434:11434"
     restart: unless-stopped
     entrypoint: ["/bin/bash", "-c"]
-    # download the model if you dont already have it, its about 1.1GB
-    command: ["ollama serve && ollama run deepseek-r1:1.5b"] 
-    # set a minimum memory to use for the container, this will ensure the 1.5b runs completely in memory
-    mem_reservation: 4g 
+    command: ["ollama serve && ollama run deepseek-r1:14b"]
+    deploy:
+      resources:
+        reservations:
+          memory: 4g  # Reserve memory for the container
+          devices:
+            - capabilities: [gpu]  # Request GPU resources
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # Make all GPUs visible to the container
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -29,8 +32,3 @@ services:
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
-# ollama volume defined so you don't need to download the model every time.
-# open-webui volume defined to retain user access/history persistence.
-volumes:
-  ollama:
-  open-webui:
